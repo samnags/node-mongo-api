@@ -16,7 +16,7 @@
   }
   console.log('Connected to MongoDB Server')
 
-// takes argument of colletion you're making. Don't need to a create command
+// db.collection takes argument of colletion you're making. Don't need to a create collection
 // insertOne takes argument of object you're putting in and a callback
   // db.collection('Todos').insertOne({
   //   text: 'Return shaker bottle',
