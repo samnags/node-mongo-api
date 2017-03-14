@@ -21,7 +21,7 @@ var Todo = mongoose.model('Todo', {
 })
 
 module.exports = {
-  todo
+  Todo
 }
 
 

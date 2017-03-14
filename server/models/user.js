@@ -11,7 +11,7 @@ var User = mongoose.model('User', {
 })
 
 module.exports = {
-  user
+  User
 }
 
 // var firstUser = new User({
