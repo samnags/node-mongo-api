@@ -31,9 +31,16 @@ app.post('/todos', (req, res) => {
 })
 
 
-// app.post('/users', (req, res) => {
-//
-// })
+app.get('/todos', (req, res) => {
+  Todo.find().then((todos) => {
+    res.send({
+      // by sending object vs the array, we have more options in future
+      todos
+    })
+  }, (e) => {
+    res.status(400).send(e)
+  })
+})
 
 
 app.listen(3000, () => {
