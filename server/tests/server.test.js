@@ -115,7 +115,44 @@ describe('GET /todos/:id', () => {
       .expect(404)
       .end(done)
   })
+})
 
+describe('DELETE /todos/:id', () => {
+  it('should delete the correct todo', (done) => {
+    var todoId = todos[0]._id.toHexString();
+    request(app)
+      .delete(`/todos/${todoId}`)
+      .expect(200)
+      .expect((res) => {
+        expect(res.body.todo._id).toBe(todoId)
+      })
+      .end((err, res) => {
+        if(err) {
+          // if error, we'll return to prevent function execution and pass it error so mocha renders it
+          return done(err);
+        }
+        Todo.findById(todoId).then((todo) => {
+          expect(todo).toNotExist();
+          done()
+          // if there is an error, just pass it to catch
+        }).catch((e) => {
+          done(e)
+        })
+      })
+  })
 
+  it('should return a 404 if todo is not found', (done) => {
+    var hexId = new ObjectID().toHexString();
+    request(app)
+      .delete(`/todos/${hexId}`)
+      .expect(404)
+      .end(done)
+  })
 
+  it('should return a 404 if id is invalid', (done) => {
+    request(app)
+      .delete('/todos/123')
+      .expect(404)
+      .end(done)
+  })
 })
