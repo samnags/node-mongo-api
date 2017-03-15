@@ -17,6 +17,9 @@ const { User } = require('./models/user')
 
 var app = express()
 
+// will be set if on heroku or not if it's locally
+const port = process.env.PORT || 3000
+
 app.use(bodyParser.json())
 
 app.post('/todos', (req, res) => {
@@ -58,8 +61,8 @@ app.get('/todos/:id', (req, res) => {
   })
 })
 
-app.listen(3000, () => {
-  console.log('Started on Port 3000')
+app.listen(port, () => {
+  console.log(`Started up on Port {$port}`)
 })
 
 module.exports = {

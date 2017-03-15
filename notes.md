@@ -20,5 +20,12 @@ var user = {name: 'Sam', age: 30}
 var {name } = user;
 
 
+Getting ready for Heroku
+- changing ports on server.js to be either environment variable or local
+- telling Heroku how to start server by adding a start script to package.json
+- telling Heroku which version of node to use by using engines in package.json
+- setup database with heroku addon - mLab
+- Use that link and change your database setting sin mongoose.js
+
 
 ./mongod --dbpath ../../mongo-data/
