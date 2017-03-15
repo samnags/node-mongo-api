@@ -1,5 +1,6 @@
   const expect = require('expect')
   const request = require('supertest')
+  const {ObjectID} = require('mongodb')
 
 // need to load in server.js so we have express app (for supertest)
 // need todo model so we can test the model
@@ -8,8 +9,10 @@
   const { Todo }= require('./../models/todo')
 
   const todos = [{
+    _id: new ObjectID(),
     text: '1st Test To Do'
   }, {
+    _id: new ObjectID(),
     text: '2nd Test To Do'
   }]
 
@@ -83,4 +86,36 @@ describe('GET /todos', () => {
       })
       .end(done)
   })
+})
+
+describe('GET /todos/:id', () => {
+  it('should find the correct todo', (done) => {
+    var todo = todos[0]
+    request(app)
+      // grabbing first todo's ID and converting to string
+       .get(`/todos/${todos[0]._id.toHexString()}`)
+       .expect(200)
+       .expect((res) => {
+         expect(res.body.todo.text).toBe(todos[0].text)
+       })
+       .end(done)
+  })
+
+  it('should return a 404 if todo not found', (done) => {
+    request(app)
+      .get(`/todos/58c8775c2bf4d37e15e2e616.toHexString()`)
+      .expect(404)
+      .end(done)
+    // use hexsring + new object id. will be valid but not collection
+  })
+
+  it('should return a 404 if id is invalid', (done) => {
+    request(app)
+      .get('/todos/123')
+      .expect(404)
+      .end(done)
+  })
+
+
+
 })
