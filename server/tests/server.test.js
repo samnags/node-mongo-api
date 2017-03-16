@@ -181,7 +181,7 @@ describe('PATCH /todos:/id', () => {
       .patch(`/todos/${todo._id}`)
       .send({text: 'This one aint done', completed: false})
       .expect((res) => {
-        expect(res.body.todo.completed).toBe(false)
+        expect(res.body.todo.completed).toBe(false )
         expect(res.body.todo.text).toBe('This one aint done')
         expect(res.body.todo.completedAt).toNotExist()
       })

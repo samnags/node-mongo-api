@@ -27,5 +27,8 @@ Getting ready for Heroku
 - setup database with heroku addon - mLab
 - Use that link and change your database setting sin mongoose.js
 
+"test": "export NODE_ENV=test mocha && server/**/*.test.js "
+- Now we're setting NODE ENV for the tests
+
 
 ./mongod --dbpath ../../mongo-data/

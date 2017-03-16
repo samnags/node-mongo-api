@@ -1,3 +1,5 @@
+require('./config/config')
+
 const _ = require('lodash')
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -19,7 +21,9 @@ const { User } = require('./models/user')
 var app = express()
 
 // will be set if on heroku or not if it's locally
-const port = process.env.PORT || 3000
+  // getting rid of this because Heroku will have it set and lines above will set it for test + development
+  // const port = process.env.PORT || 3000
+  const port = process.env.PORT;
 
 app.use(bodyParser.json())
 
@@ -80,7 +84,7 @@ app.delete('/todos/:id', (req, res) => {
 app.patch('/todos/:id', (req, res) => {
   var id = req.params.id
   // subset of the things user passes to us. Similar to strong params
-  var body = _.pick(req.body, ['text', 'completed'])  
+  var body = _.pick(req.body, ['text', 'completed'])
   if (!ObjectID.isValid(id)) {
     return res.status(404).send();
   }
