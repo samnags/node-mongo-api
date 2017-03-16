@@ -80,8 +80,7 @@ app.delete('/todos/:id', (req, res) => {
 app.patch('/todos/:id', (req, res) => {
   var id = req.params.id
   // subset of the things user passes to us. Similar to strong params
-  var body = _.pick(req.body, ['text', 'completed'])
-  console.log('Body:', body)
+  var body = _.pick(req.body, ['text', 'completed'])  
   if (!ObjectID.isValid(id)) {
     return res.status(404).send();
   }
